@@ -71,7 +71,7 @@ fn main() {
             .unwrap_or((50, 50));
         let (x, y) = (
             cli.width.map(|x| x as u32).unwrap_or(x),
-            cli.height.map(|x| x as u32).unwrap_or(y),
+            cli.tall.map(|x| x as u32).unwrap_or(y),
         );
         let x = x / PIXEL_DIMENSIONS;
         let terminal_aspect = x as f32 / y as f32;

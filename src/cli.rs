@@ -22,7 +22,7 @@ pub struct Cli {
     pub width: Option<u16>,
     #[arg(short, long, value_name = "HEIGHT")]
     /// The height of the "terminal" to draw the image in
-    pub height: Option<u16>,
+    pub tall: Option<u16>,
 }
 
 #[derive(clap::ValueEnum, Clone, Copy, Debug)]
