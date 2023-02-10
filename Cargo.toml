@@ -10,3 +10,6 @@ clap = { version = "4.1.4", features = ["derive", "env", "color"] }
 image = { version = "0.24.5", features = ["avif-decoder", "libwebp"] }
 owo-colors = { version = "3.5.0", features = ["supports-colors"] }
 terminal_size = "0.2.3"
+
+[profile.dev.package."*"]
+opt-level = 3

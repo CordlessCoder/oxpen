@@ -17,6 +17,12 @@ pub struct Cli {
     #[arg(short, long, value_name = "COLOR", default_value = "auto")]
     /// Whether to enable printing in color
     pub color: ColorChoice,
+    #[arg(short, long, value_name = "WIDTH")]
+    /// The width of the "terminal" to draw the image in
+    pub width: Option<u16>,
+    #[arg(short, long, value_name = "HEIGHT")]
+    /// The height of the "terminal" to draw the image in
+    pub height: Option<u16>,
 }
 
 #[derive(clap::ValueEnum, Clone, Copy, Debug)]
