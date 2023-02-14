@@ -88,6 +88,14 @@ fn main() {
             )
         }
     };
+
+    let width = (width as f32 * {
+        if cli.multi_width >= 0.1 && cli.multi_width <= 50.0 {
+            cli.multi_width
+        } else {
+            1.0
+        }
+    }) as u32;
     let image = image.into_rgba8();
     let image = resize(&image, width, height * 2, cli.filter.into());
     let mut stdout = stdout().lock();

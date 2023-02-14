@@ -23,6 +23,9 @@ pub struct Cli {
     #[arg(short, long, value_name = "HEIGHT")]
     /// The height of the "terminal" to draw the image in
     pub tall: Option<u16>,
+    #[arg(short, long, value_name = "MULTIPLIER", default_value = "1.0")]
+    /// The height of the "terminal" to draw the image in
+    pub multi_width: f32,
 }
 
 #[derive(clap::ValueEnum, Clone, Copy, Debug)]
