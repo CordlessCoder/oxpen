@@ -26,6 +26,16 @@ pub struct Cli {
     #[arg(short, long, value_name = "MULTIPLIER", default_value = "1.0")]
     /// The height of the "terminal" to draw the image in
     pub multi_width: f32,
+    #[arg(
+        short,
+        long,
+        value_name = "OFFSET",
+        env = "OXPEN_HEIGHT_ADJ",
+        default_value = "0"
+    )]
+    /// How much to subtract from the terminal height to compensate for stuff like the height of
+    /// the prompt
+    pub offset_height: u8,
 }
 
 #[derive(clap::ValueEnum, Clone, Copy, Debug)]

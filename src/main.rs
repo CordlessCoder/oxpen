@@ -67,7 +67,7 @@ fn main() {
     };
     let (width, height) = {
         let (x, y) = terminal_size()
-            .map(|(x, y)| (x.0 as u32, y.0 as u32))
+            .map(|(x, y)| (x.0 as u32, y.0 as u32 - cli.offset_height as u32))
             .unwrap_or((50, 50));
         let (x, y) = (
             cli.width.map(|x| x as u32).unwrap_or(x),
