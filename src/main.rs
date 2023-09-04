@@ -99,7 +99,7 @@ fn main() {
     let image = image.into_rgba8();
     let image = resize(&image, width, height * 2, cli.filter.into());
     let mut stdout = stdout().lock();
-    let mut writer = BufWriter::new(stdout);
+    let mut writer = BufWriter::with_capacity(64 * 1024, stdout);
     let binding = "🮄".repeat(PIXEL_DIMENSIONS as usize);
     let pixel = binding.as_bytes();
     let placeholder = " ".repeat(PIXEL_DIMENSIONS as usize);
@@ -111,49 +111,49 @@ fn main() {
             let alpha = (pixu.0[3] >= THRESHOLD, pix.0[3] >= THRESHOLD);
             match alpha {
                 (true, true) => {
-                    writer.write_all(b"\x1b[48;2;");
-                    writer.write_all(to_num(pix.0[0]));
-                    writer.write(b";");
-                    writer.write_all(to_num(pix.0[1]));
-                    writer.write(b";");
-                    writer.write_all(to_num(pix.0[2]));
-                    writer.write_all(b"m");
-                    writer.write_all(b"\x1b[38;2;");
-                    writer.write_all(to_num(pixu.0[0]));
-                    writer.write(b";");
-                    writer.write_all(to_num(pixu.0[1]));
-                    writer.write(b";");
-                    writer.write_all(to_num(pixu.0[2]));
-                    writer.write_all(b"m");
-                    writer.write_all(pixel);
-                    writer.write_all(b"\x1b[39;49m");
+                    let _ = writer.write_all(b"\x1b[48;2;");
+                    let _ = writer.write_all(to_num(pix.0[0]));
+                    let _ = writer.write(b";");
+                    let _ = writer.write_all(to_num(pix.0[1]));
+                    let _ = writer.write(b";");
+                    let _ = writer.write_all(to_num(pix.0[2]));
+                    let _ = writer.write_all(b"m");
+                    let _ = writer.write_all(b"\x1b[38;2;");
+                    let _ = writer.write_all(to_num(pixu.0[0]));
+                    let _ = writer.write(b";");
+                    let _ = writer.write_all(to_num(pixu.0[1]));
+                    let _ = writer.write(b";");
+                    let _ = writer.write_all(to_num(pixu.0[2]));
+                    let _ = writer.write_all(b"m");
+                    let _ = writer.write_all(pixel);
+                    let _ = writer.write_all(b"\x1b[39;49m");
                 }
                 (true, _) => {
-                    writer.write_all(b"\x1b[38;2;");
-                    writer.write_all(to_num(pixu.0[0]));
-                    writer.write(b";");
-                    writer.write_all(to_num(pixu.0[1]));
-                    writer.write(b";");
-                    writer.write_all(to_num(pixu.0[2]));
-                    writer.write_all(b"m");
-                    writer.write_all(pixel);
-                    writer.write_all(b"\x1b[39;49m");
+                    let _ = writer.write_all(b"\x1b[38;2;");
+                    let _ = writer.write_all(to_num(pixu.0[0]));
+                    let _ = writer.write(b";");
+                    let _ = writer.write_all(to_num(pixu.0[1]));
+                    let _ = writer.write(b";");
+                    let _ = writer.write_all(to_num(pixu.0[2]));
+                    let _ = writer.write_all(b"m");
+                    let _ = writer.write_all(pixel);
+                    let _ = writer.write_all(b"\x1b[39;49m");
                 }
                 (_, true) => {
-                    writer.write_all(b"\x1b[38;2;");
-                    writer.write_all(to_num(pix.0[0]));
-                    writer.write(b";");
-                    writer.write_all(to_num(pix.0[1]));
-                    writer.write(b";");
-                    writer.write_all(to_num(pix.0[2]));
-                    writer.write_all(b"m");
-                    writer.write_all(b"\xF0\x9F\xAC\xAD\x1b[39;49m");
+                    let _ = writer.write_all(b"\x1b[38;2;");
+                    let _ = writer.write_all(to_num(pix.0[0]));
+                    let _ = writer.write(b";");
+                    let _ = writer.write_all(to_num(pix.0[1]));
+                    let _ = writer.write(b";");
+                    let _ = writer.write_all(to_num(pix.0[2]));
+                    let _ = writer.write_all(b"m");
+                    let _ = writer.write_all(b"\xF0\x9F\xAC\xAD\x1b[39;49m");
                 }
                 _ => {
-                    writer.write_all(pixel_placeholder);
+                    let _ = writer.write_all(pixel_placeholder);
                 }
             }
         });
-        writer.write_all(b"\n");
+        let _ = writer.write_all(b"\n");
     });
 }
